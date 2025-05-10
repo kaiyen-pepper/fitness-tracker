@@ -4,12 +4,15 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
+  root to: "home#index"
 
   # This means when someone goes to /users, the app shows the index action in the UsersController
   get "/users", to: "users#index"
   # RESTful routes. These are standard ways to handle creating, reading, updating, and deleting (CRUD) things in your app
   resources :users
-  
+
+  resources :workouts
+
   # to make a user profile page
   get "/profile", to: "users#profile"
 
