@@ -1,0 +1,21 @@
+<div class="min-h-screen flex flex-col items-center space-y-10 p-6">
+  <h1 class="text-2xl font-semibold text-gray-700">🏋️ Workout Tracker</h1>
+
+  <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
+    <!-- Dashboard box -->
+    <div class="w-80 h-60 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-xl font-medium">
+      Dashboard
+    </div>
+
+    <!-- Friends box -->
+    <div class="w-80 h-60 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-xl font-medium">
+      Friends
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="space-y-4">
+    <%= link_to "Log Workout", new_workout_path, class: "block w-40 text-center bg-gray-300 text-black py-2 rounded-full shadow hover:bg-gray-400 transition" %>
+    <%= link_to "Edit Workout", workouts_path, class: "block w-40 text-center bg-gray-300 text-black py-2 rounded-full shadow hover:bg-gray-400 transition" %>
+  </div>
+</div>

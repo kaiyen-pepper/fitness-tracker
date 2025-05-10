@@ -7,3 +7,12 @@ db/schema.rb linguist-generated
 vendor/* linguist-vendored
 config/credentials/*.yml.enc diff=rails_credentials
 config/credentials.yml.enc diff=rails_credentials
+
+# Normalize line endings
+* text=auto
+
+# Ruby files use LF
+*.rb text eol=lf
+
+# Shell scripts and binstubs use LF and should be executable
+bin/* text eol=lf

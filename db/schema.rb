@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_10_032528) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_10_060754) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-end
 
-class CreateProducts < ActiveRecord::Migration[7.1]
-  def change
-    create_table :products do |t|
-      t.string :name
-      t.text :description
-      t.timestamps
-    end
+  create_table "workouts", force: :cascade do |t|
+    t.string "workout_type"
+    t.integer "duration"
+    t.integer "reps"
+    t.text "notes"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 end
