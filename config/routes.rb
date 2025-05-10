@@ -18,6 +18,16 @@ Rails.application.routes.draw do
     resources :articles, :comments
   end
   
+  # This creates standard RESTful routes plus two custom ones:
+  # GET /products/:id/variants to show product variants
+  # POST /products/:id/duplicate to copy a product
+  resources :products do
+    member do
+      get 'variants'
+      post 'duplicate'
+    end
+  end
+
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
