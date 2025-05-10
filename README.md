@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Getting Started
+
+1. Ensure you're using Ruby version specified in `.ruby-version` (use rbenv or rvm).
+2. Run `bundle install` to install gems.
+3. Give executable permission to binstubs (if needed):
+   ```bash
+   chmod +x bin/*
