@@ -3,5 +3,6 @@ class HomeController < ApplicationController
 
   def index
     # dashboard logic
+    @workouts = Workout.all
   end
 end
