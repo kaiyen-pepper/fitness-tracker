@@ -1,21 +1,46 @@
 <div class="min-h-screen flex flex-col items-center space-y-10 p-6">
-  <h1 class="text-2xl font-semibold text-gray-700">🏋️ Workout Tracker</h1>
+  <h1 class="text-2xl font-semibold">Workout Tracker</h1>
 
-  <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
-    <!-- Dashboard box -->
-    <div class="w-80 h-60 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-xl font-medium">
-      Dashboard
+  <div class="w-full max-w-full flex flex-col md:flex-row justify-center items-start gap-10 mt-6">
+
+    <div class="w-full max-w-4xl text-center space-y-2">
+      <h2 class="text-xl font-semibold text-gray-700">Current Streak</h2>
+      <p class="text-2xl">
+        <span class="text-green-600"><%= current_streak(@workouts) %></span>
+        day<%= 's' unless current_streak(@workouts) == 1 %>
+      </p>
+
+      <% if @workouts.where(date: 3.days.ago.to_date..Date.today).none? %>
+        <div class="bg-red-100 text-red-800 px-4 py-3 rounded-md shadow-md max-w-xl mx-auto">
+          You haven’t logged a workout in the last 3 days!
+        </div>
+      <% end %>
     </div>
 
-    <!-- Friends box -->
-    <div class="w-80 h-60 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-xl font-medium">
-      Friends
+
+    <!-- 🏆 Top Exercises Chart -->
+    <div class="w-full max-w-4xl mt-10">
+      <h3 class="text-xl font-semibold text-center text-gray-700 mb-4">🏆 Top Exercises</h3>
+      <%= bar_chart top_exercises(@workouts).to_h.transform_keys(&:titleize),
+                    height: "300px",
+                    colors: ["#b1e0c0"],
+                    library: {
+                      indexAxis: 'y',
+                      scales: {
+                        x: {
+                          beginAtZero: true,
+                          ticks: {
+                            stepSize: 1,
+                            precision: 0
+                          }
+                        }
+                      }
+                    } %>
     </div>
   </div>
 
-  <!-- Buttons -->
-  <div class="space-y-4">
-    <%= link_to "Log Workout", new_workout_path, class: "block w-40 text-center bg-gray-300 text-black py-2 rounded-full shadow hover:bg-gray-400 transition" %>
-    <%= link_to "Edit Workout", workouts_path, class: "block w-40 text-center bg-gray-300 text-black py-2 rounded-full shadow hover:bg-gray-400 transition" %>
+  <div class="mt-10 space-y-4">
+    <%= link_to "Log Workout", new_workout_path, class: "block w-40 text-center bg-yellow-200 text-black py-2 rounded-full shadow hover:bg-yellow-300 transition" %>
+    <%= link_to "View Workouts", workouts_path, class: "block w-40 text-center bg-yellow-200 text-black py-2 rounded-full shadow hover:bg-yellow-300 transition" %>
   </div>
 </div>
