@@ -1,15 +1,30 @@
 module WorkoutsHelper
-  def workout_days_this_week(workouts)
-    start_of_week = Date.today.beginning_of_week(:sunday)
-    end_of_week = start_of_week + 6
+  def current_streak(workouts)
+    return 0 if workouts.empty?
 
-    days = (start_of_week..end_of_week).to_a
+    workout_dates = workouts.pluck(:date).uniq.sort.reverse
+    today = Date.today
 
-    # Create a set of workout dates
-    workout_dates = workouts.where(date: start_of_week..end_of_week).pluck(:date).to_set
+    streak = 0
+    workout_dates.each do |date|
+      expected_date = today - streak
+      break unless date == expected_date
 
-    days.map do |day|
-      { date: day, worked_out: workout_dates.include?(day) }
+      streak += 1
     end
+
+    streak
+  end
+
+  def top_exercises(workouts, limit = 5)
+    return [] if workouts.empty?
+
+    grouped = workouts
+                .map { |w| w.workout_type&.strip&.downcase }
+                .compact
+                .tally
+                .sort_by { |_, count| -count }
+
+    grouped.first(limit)
   end
 end
