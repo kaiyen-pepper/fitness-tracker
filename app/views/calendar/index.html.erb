@@ -1,0 +1,25 @@
+<!-- app/views/calendar/index.html.erb -->
+
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-green-100 p-6 flex flex-col items-center space-y-8">
+
+  <!-- Title -->
+  <h1 class="text-4xl font-bold text-blue-800">Workout Calendar</h1>
+
+  <!-- Calendar -->
+  <div class="w-full max-w-5xl bg-white shadow-xl rounded-xl p-6">
+    <%= month_calendar events: @workouts, attribute: :date do |date, workouts| %>
+      <div class="h-24 p-1 overflow-y-auto">
+        <div class="text-sm font-semibold text-gray-700"><%= date.day %></div>
+        <% workouts.each do |workout| %>
+          <div class="mt-1 bg-green-200 text-green-900 text-xs px-2 py-1 rounded shadow-sm">
+            <%= workout.workout_type %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Back Button -->
+  <%= link_to "Back to Main", root_path, class: "bg-yellow-300 hover:bg-yellow-400 text-black font-semibold px-6 py-2 rounded-full shadow transition" %>
+
+</div>
