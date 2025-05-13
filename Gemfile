@@ -66,3 +66,4 @@ gem "tailwindcss-rails", "~> 4.2"
 gem "chartkick"
 gem "groupdate"
 gem 'simple_calendar', '~> 2.0'
+gem 'rails_authentication'
