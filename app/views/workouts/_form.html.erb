@@ -28,7 +28,7 @@
 
   <div class="my-5">
     <%= form.label :notes %>
-    <%= form.textarea :notes, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": workout.errors[:notes].none?, "border-red-400 focus:outline-red-600": workout.errors[:notes].any?}] %>
+    <%= form.text_area :notes, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": workout.errors[:notes].none?, "border-red-400 focus:outline-red-600": workout.errors[:notes].any?}] %>
   </div>
 
   <div class="my-5">
