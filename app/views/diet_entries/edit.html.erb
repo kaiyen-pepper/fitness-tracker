@@ -1,58 +1,54 @@
-<div class="max-w-2xl mx-auto">
-  <h1 class="text-3xl font-bold mb-6">Edit Diet Entry</h1>
+<h1 class="text-2xl font-bold mb-4">Edit Diet Entry</h1>
 
-  <%= form_with(model: @diet_entry, local: true, class: "space-y-4") do |form| %>
-    <% if @diet_entry.errors.any? %>
-      <div class="bg-red-100 text-red-700 p-4 rounded">
-        <h2 class="font-semibold mb-2"><%= pluralize(@diet_entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
-        <ul class="list-disc ml-5">
-          <% @diet_entry.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div>
-      <%= form.label :meal_type, class: "block font-semibold" %>
-      <%= form.select :meal_type, ["Breakfast", "Lunch", "Dinner", "Snack"], {}, class: "w-full border rounded p-2" %>
-    </div>
-
-    <div>
-      <%= form.label :description, class: "block font-semibold" %>
-      <%= form.text_area :description, class: "w-full border rounded p-2" %>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div>
-        <%= form.label :calories, class: "block font-semibold" %>
-        <%= form.number_field :calories, class: "w-full border rounded p-2" %>
-      </div>
-
-      <div>
-        <%= form.label :protein, class: "block font-semibold" %>
-        <%= form.number_field :protein, class: "w-full border rounded p-2" %>
-      </div>
-
-      <div>
-        <%= form.label :carbs, class: "block font-semibold" %>
-        <%= form.number_field :carbs, class: "w-full border rounded p-2" %>
-      </div>
-
-      <div>
-        <%= form.label :fat, class: "block font-semibold" %>
-        <%= form.number_field :fat, class: "w-full border rounded p-2" %>
-      </div>
-    </div>
-
-    <div>
-      <%= form.label :consumed_at, "Date and Time Consumed", class: "block font-semibold" %>
-      <%= form.datetime_select :consumed_at, class: "w-full border rounded p-2" %>
-    </div>
-
-    <div class="flex gap-4 mt-6">
-      <%= form.submit "Update Entry", class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
-      <%= link_to 'Back to Diet Log', diet_entries_path, class: "bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded" %>
+<%= form_with(model: @diet_entry, local: true, class: "space-y-4") do |form| %>
+  <% if @diet_entry.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-bold mb-2"><%= pluralize(@diet_entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+      <ul class="list-disc pl-5">
+        <% @diet_entry.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-</div>
+
+  <div>
+    <%= form.label :meal_type, class: "block font-semibold" %>
+    <%= form.select :meal_type, ["Breakfast", "Lunch", "Dinner", "Snack"], {}, class: "w-full mt-1 border rounded px-3 py-2" %>
+  </div>
+
+  <div>
+    <%= form.label :description, class: "block font-semibold" %>
+    <%= form.text_area :description, class: "w-full mt-1 border rounded px-3 py-2", rows: 3 %>
+  </div>
+
+  <div>
+    <%= form.label :calories, class: "block font-semibold" %>
+    <%= form.number_field :calories, class: "w-full mt-1 border rounded px-3 py-2" %>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4">
+    <div>
+      <%= form.label :protein, class: "block font-semibold" %>
+      <%= form.number_field :protein, class: "w-full mt-1 border rounded px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :carbs, class: "block font-semibold" %>
+      <%= form.number_field :carbs, class: "w-full mt-1 border rounded px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :fat, class: "block font-semibold" %>
+      <%= form.number_field :fat, class: "w-full mt-1 border rounded px-3 py-2" %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.label :consumed_at, "Date and Time Consumed", class: "block font-semibold" %>
+    <%= form.datetime_select :consumed_at, class: "w-full mt-1 border rounded px-3 py-2" %>
+  </div>
+
+  <div class="flex gap-4 mt-6">
+    <%= form.submit "Update Entry", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+    <%= link_to "Back to Diet Log", diet_entries_path, class: "text-gray-600 underline self-center" %>
+  </div>
+<% end %>

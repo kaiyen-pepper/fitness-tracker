@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_13_052200) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_13_061152) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_13_052200) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "diet_entries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "meal_type"
+    t.text "description"
+    t.integer "calories"
+    t.integer "protein"
+    t.integer "carbs"
+    t.integer "fat"
+    t.datetime "consumed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_diet_entries_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -56,11 +70,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_13_052200) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email_address", null: false
-    t.string "password_digest", null: false
+    t.string "name"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.string "password_digest"
   end
 
   create_table "workouts", force: :cascade do |t|
@@ -75,5 +89,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_13_052200) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "diet_entries", "users"
   add_foreign_key "sessions", "users"
 end
