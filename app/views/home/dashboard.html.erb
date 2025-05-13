@@ -3,7 +3,8 @@
     Welcome, <span class="font-semibold text-green-600"><%= Current.user.email_address %></span>!
   </p>
 
-  <%= button_to "Logout", session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-200" %>
+  <%= button_to "Logout", session_path, method: :delete %>
+
 </div>
 
 

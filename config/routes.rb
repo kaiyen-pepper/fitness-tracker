@@ -32,4 +32,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#home"
   get "dashboard", to: "home#dashboard"
+
+  # delete session
+  resource :session, only: [:new, :create, :destroy]
 end
