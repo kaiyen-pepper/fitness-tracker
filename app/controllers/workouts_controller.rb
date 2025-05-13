@@ -1,70 +1,51 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: %i[ show edit update destroy ]
+  before_action :require_login
+  before_action :set_workout, only: [:show, :edit, :update, :destroy]
 
-  # GET /workouts or /workouts.json
   def index
-    @workouts = Workout.all
+    @workouts = Current.user.workouts.order(date: :desc)
   end
 
-  # GET /workouts/1 or /workouts/1.json
-  def show
-  end
+  def show; end
 
-  # GET /workouts/new
   def new
-    @workout = Workout.new
+    @workout = Current.user.workouts.new
   end
 
-  # GET /workouts/1/edit
-  def edit
-  end
-
-  # POST /workouts or /workouts.json
   def create
-    @workout = Workout.new(workout_params)
+    @workout = Current.user.workouts.new(workout_params)
 
-    respond_to do |format|
-      if @workout.save
-        format.html { redirect_to @workout, notice: "Workout was successfully created." }
-        format.json { render :show, status: :created, location: @workout }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
+    if @workout.save
+      redirect_to workouts_path, notice: "Workout successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /workouts/1 or /workouts/1.json
+  def edit; end
+
   def update
-    respond_to do |format|
-      if @workout.update(workout_params)
-        format.html { redirect_to @workout, notice: "Workout was successfully updated." }
-        format.json { render :show, status: :ok, location: @workout }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
+    if @workout.update(workout_params)
+      redirect_to workouts_path, notice: "Workout updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /workouts/1 or /workouts/1.json
   def destroy
-    @workout.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to workouts_path, status: :see_other, notice: "Workout was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @workout.destroy
+    redirect_to workouts_path, notice: "Workout deleted."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_workout
-      @workout = Workout.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def workout_params
-      params.expect(workout: [ :workout_type, :duration, :reps, :notes, :date ])
-    end
+  def set_workout
+    @workout = Current.user.workouts.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to workouts_path, alert: "Workout not found or you're not authorized."
+  end
+
+  def workout_params
+    params.require(:workout).permit(:workout_type, :duration, :reps, :notes, :date)
+  end
 end
