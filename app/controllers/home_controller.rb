@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def dashboard
+    @workouts = Workout.all
     # if not logged in only go to login page
     redirect_to new_session_path unless authenticated?
   end
