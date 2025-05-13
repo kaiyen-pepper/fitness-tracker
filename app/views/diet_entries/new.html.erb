@@ -1,0 +1,47 @@
+<div class="max-w-2xl mx-auto mt-10 px-4">
+  <h1 class="text-3xl font-bold mb-6">New Diet Entry</h1>
+
+  <%= form_with model: @diet_entry, local: true do |form| %>
+    <div class="space-y-4">
+      <div>
+        <%= form.label :meal_type, class: "block font-semibold mb-1" %>
+        <%= form.select :meal_type, ["Breakfast", "Lunch", "Dinner", "Snack"], {}, class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <div>
+        <%= form.label :description, class: "block font-semibold mb-1" %>
+        <%= form.text_area :description, class: "w-full border rounded px-3 py-2", rows: 3 %>
+      </div>
+
+      <div>
+        <%= form.label :calories, class: "block font-semibold mb-1" %>
+        <%= form.number_field :calories, class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <%= form.label :protein, class: "block font-semibold mb-1" %>
+          <%= form.number_field :protein, class: "w-full border rounded px-3 py-2" %>
+        </div>
+        <div>
+          <%= form.label :carbs, class: "block font-semibold mb-1" %>
+          <%= form.number_field :carbs, class: "w-full border rounded px-3 py-2" %>
+        </div>
+        <div>
+          <%= form.label :fat, class: "block font-semibold mb-1" %>
+          <%= form.number_field :fat, class: "w-full border rounded px-3 py-2" %>
+        </div>
+      </div>
+
+      <div>
+        <%= form.label :consumed_at, "Date and Time Consumed", class: "block font-semibold mb-1" %>
+        <%= form.datetime_select :consumed_at, {}, class: "w-full border rounded px-3 py-2" %>
+      </div>
+
+      <div class="flex gap-4 mt-6">
+        <%= form.submit "Save Entry", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded shadow-md" %>
+        <%= link_to "Back to Log", diet_entries_path, class: "bg-gray-200 hover:bg-gray-300 text-black font-semibold px-4 py-2 rounded shadow-md" %>
+      </div>
+    </div>
+  <% end %>
+</div>

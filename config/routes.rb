@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resources :workouts
 
+  resources :diet_entries
+
+
   # to make a user profile page
   get "/profile", to: "users#profile"
 

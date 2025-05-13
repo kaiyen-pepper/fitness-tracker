@@ -1,0 +1,33 @@
+<h1 class="text-3xl font-bold mb-6">🍽️ Diet Tracker</h1>
+
+<div class="space-y-4 mb-6">
+
+  <% [:calories, :protein, :carbs, :fat].each do |nutrient| %>
+    <div>
+      <div class="flex justify-between mb-1">
+        <span class="font-semibold capitalize"><%= nutrient %></span>
+        <span class="text-sm text-gray-600">
+          <%= @summary[nutrient] %> / <%= @targets[nutrient] %> <%= nutrient == :calories ? 'kcal' : 'g' %>
+        </span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-4">
+        <div class="h-4 rounded-full transition-all duration-300"
+             style="width: <%= [(@summary[nutrient].to_f / @targets[nutrient]) * 100, 100].min %>%;
+                    background-color: <%= case nutrient
+                      when :calories then '#4ade80'   # green
+                      when :protein  then '#60a5fa'   # blue
+                      when :carbs    then '#38bdf8'   # sky
+                      when :fat      then '#f87171'   # red
+                    end %>;">
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<div class="flex gap-4 mb-6">
+  <%= link_to "Add Entry", new_diet_entry_path, class: "bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-full shadow-md" %>
+  <%= link_to "View Full Log", diet_entries_path, class: "bg-yellow-300 hover:bg-yellow-400 px-4 py-2 rounded-full shadow-md" %>
+</div>
+
