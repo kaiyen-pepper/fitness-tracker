@@ -1,32 +1,50 @@
-# README
+Fitness Tracker README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Ruby on Rails fitness tracking web application to log workouts
 
-Things you may want to cover:
+---
 
-* Ruby version
+REQUIREMENTS: 
 
-* System dependencies
+Make sure you have the following installed before running the app:
 
-* Configuration
+### Ruby
+Install Ruby:
 
-* Database creation
+### Ruby on Rails
+Install Rails:
 
-* Database initialization
+### SQLite3
+Install SQLite3:
 
-* How to run the test suite
+### Yarn & NPM
+Install Yarn and Node.js:
 
-* Services (job queues, cache servers, search engines, etc.)
+### Tailwind CSS
+Tailwind is installed via Rails using `tailwindcss-rails`. You can double check it's initialized with:
+---
 
-* Deployment instructions
+RUNNING THE CODE
 
-* ...
+### 1. Clone the repository
 
-## Getting Started
+https://github.com/kaiyen-pepper/fitness-tracker/tree/master
 
-1. Ensure you're using Ruby version specified in `.ruby-version` (use rbenv or rvm).
-2. Run `bundle install` to install gems.
-3. Give executable permission to binstubs (if needed):
-   ```bash
-   chmod +x bin/*
+### 2. Install Ruby Gems
+
+bundle install
+
+### 3. Install JavaScript Dependencies
+
+yarn install
+
+### 4. Run the Server
+
+rails server
+
+### 5. Use the following credentials to log in:
+
+Username: kaitlinyen@cpp.edu
+password: password
+
+Visit the app in your browser at [http://localhost:3000]
